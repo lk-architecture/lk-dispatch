@@ -1,0 +1,47 @@
+{
+  "name": "lk-dispatch",
+  "version": "1.0.0",
+  "description": "Canonical way to dispatch events to kinesis in the lk-architecture",
+  "main": "lib/get-dispatch.js",
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "clean": "rimraf lib coverage",
+    "coverage": "NODE_ENV=test babel-node $(npm bin)/isparta cover $(npm bin)/_mocha -- --recursive",
+    "codecov": "codecov",
+    "dev": "npm test -- --watch",
+    "lint": "eslint src test",
+    "prepublish": "npm run clean && npm run build",
+    "test": "NODE_ENV=test mocha --compilers js:babel-core/register --require babel-polyfill --recursive"
+  },
+  "author": "Team Wattellina <wattellina@mondora.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lk-architecture/lk-dispatch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lk-architecture/lk-dispatch/issues"
+  },
+  "devDependencies": {
+    "babel": "^6.3.13",
+    "babel-cli": "^6.3.13",
+    "babel-core": "^6.3.13",
+    "babel-eslint": "^5.0.0-beta4",
+    "babel-plugin-rewire": "^1.0.0-beta-2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "chai": "^3.4.1",
+    "codecov": "^1.0.1",
+    "eslint": "^1.10.3",
+    "isparta": "^4.0.0",
+    "mocha": "^2.3.4",
+    "rimraf": "^2.5.0",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0",
+    "validator": "^4.4.0"
+  },
+  "dependencies": {
+    "lodash.omit": "^3.1.0",
+    "node-uuid": "^1.4.7"
+  }
+}
