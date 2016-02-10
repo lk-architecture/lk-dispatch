@@ -44,7 +44,8 @@ describe("dispatch", () => {
                         timestamp: new Date().toISOString(),
                         source: {
                             userId: null,
-                            producerId: "producerId"
+                            producerId: "producerId",
+                            kinesisPartitionKey: "uuid"
                         }
                     }),
                     PartitionKey: "uuid",
@@ -64,7 +65,8 @@ describe("dispatch", () => {
                         timestamp: new Date().toISOString(),
                         source: {
                             userId: "sourceUserId",
-                            producerId: "producerId"
+                            producerId: "producerId",
+                            kinesisPartitionKey: "uuid"
                         }
                     }),
                     PartitionKey: "uuid",
@@ -84,7 +86,8 @@ describe("dispatch", () => {
                         timestamp: new Date().toISOString(),
                         source: {
                             userId: null,
-                            producerId: "producerId"
+                            producerId: "producerId",
+                            kinesisPartitionKey: "uuid"
                         }
                     }),
                     PartitionKey: "uuid",
@@ -104,7 +107,8 @@ describe("dispatch", () => {
                         timestamp: new Date().toISOString(),
                         source: {
                             userId: null,
-                            producerId: "producerId"
+                            producerId: "producerId",
+                            kinesisPartitionKey: "partitionKey"
                         }
                     }),
                     PartitionKey: "partitionKey",
@@ -124,7 +128,8 @@ describe("dispatch", () => {
                         timestamp: new Date().toISOString(),
                         source: {
                             userId: null,
-                            producerId: "producerId"
+                            producerId: "producerId",
+                            kinesisPartitionKey: "uuid"
                         }
                     }),
                     PartitionKey: "uuid",
@@ -143,7 +148,8 @@ describe("dispatch", () => {
                     timestamp: new Date().toISOString(),
                     source: {
                         userId: null,
-                        producerId: "producerId"
+                        producerId: "producerId",
+                        kinesisPartitionKey: "uuid"
                     }
                 });
             });
@@ -164,7 +170,15 @@ describe("events", () => {
         producerId: "producerId"
     });
 
+    beforeEach(() => {
+        getDispatch.__Rewire__("v4", () => "uuid");
+    });
+    afterEach(() => {
+        getDispatch.__ResetDependency__("v4");
+    });
+
     it("have an `id` property (uuid v4 string)", () => {
+        getDispatch.__ResetDependency__("v4");
         return dispatch("eventType", {key: "value"}, {})
             .then(event => {
                 expect(event.id).to.satisfy(id => isUUID(id, 4));
@@ -199,7 +213,8 @@ describe("events", () => {
                 expect(event.source).to.be.an("object");
                 expect(event.source).to.deep.equal({
                     userId: null,
-                    producerId: "producerId"
+                    producerId: "producerId",
+                    kinesisPartitionKey: "uuid"
                 });
             });
     });

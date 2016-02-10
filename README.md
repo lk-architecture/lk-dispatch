@@ -36,6 +36,63 @@ dispatch(eventType, eventData, eventOptions)
     });
 ```
 
+## Events in the lk-architecture
+
+An event in the lk-architecture is a json object which conforms to the following
+json schema:
+
+```json
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "timestamp": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "data": {
+            "type": "object"
+        },
+        "source": {
+            "type": "object",
+            "properties": {
+                "kinesisPartitionKey": {
+                    "type": "string"
+                },
+                "producerId": {
+                    "type": "string"
+                },
+                "producerId": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+```
+
+Example event:
+
+```js
+const event = {
+    id: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    type: "eventType",
+    data: {/* whatever */},
+    timestamp: "2016-01-01T00:00:00.000Z",
+    source: {
+        userId: "userId",
+        producerId: "producerId",
+        kinesisPartitionKey: "kinesisPartitionKey"
+    }
+};
+```
+
 ## Api
 
 #### getDispatch(options)
