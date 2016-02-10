@@ -1,6 +1,6 @@
 {
   "name": "lk-dispatch",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Canonical way to dispatch events to kinesis in the lk-architecture",
   "main": "lib/get-dispatch.js",
   "scripts": {
