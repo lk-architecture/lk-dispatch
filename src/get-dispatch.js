@@ -1,4 +1,4 @@
-import {v4} from "node-uuid";
+import {v4} from "uuid";
 import {promisify} from "bluebird";
 
 export default function getDispatch (dispatchOptions) {
